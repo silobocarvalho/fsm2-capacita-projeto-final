@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TIPO_POKEMON {
+  Eletrico
+  Agua
+  Planta
+  Pedra
+  Fastasma
+  Fogo
+  Terra
+  Psiquico
+  Ar
+  Veneno
+}
+
+enum RARIDADE_POKEMON {
+  Comum
+  Raro
+  SemiRaro
+  Epico
+  Legendario
+  Divino
+}
+
+model pokemons{
+  id_pokemon Int @id @default(autoincrement())
+  nome String @unique
+  preco Float
+  estoque Int @default(0)
+  tipo TIPO_POKEMON
+  raridade RARIDADE_POKEMON
+  url_img String
+}

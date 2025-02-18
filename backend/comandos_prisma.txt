@@ -1,0 +1,14 @@
+npm init -y (já confirmar com o -y)
+Cria o package.json
+
+npm install express @prisma/client
+Instala Prisma e Express
+
+npm install prisma --save-dev
+Instala no ambiente de dev
+
+npx prisma init
+Cria arquivos de configuração do Prisma
+
+--Inicializar o banco de dados e atualizar o modelo
+npx prisma migrate dev --name init
