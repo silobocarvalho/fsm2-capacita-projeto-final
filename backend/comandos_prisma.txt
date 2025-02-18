@@ -1,7 +1,11 @@
 npm init -y (já confirmar com o -y)
 Cria o package.json
 
-npm install express @prisma/client
+npm install express @prisma/client 
+é igual a 
+npm install express 
+npm install @prisma/client 
+
 Instala Prisma e Express
 
 npm install prisma --save-dev
