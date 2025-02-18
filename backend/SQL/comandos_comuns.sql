@@ -46,3 +46,6 @@ SELECT AVG(preco) FROM pokemons
 
 -- Como resgatar o pokemon mais caro listando somente o Nome e o Preco dele.
 SELECT nome, preco FROM pokemons WHERE preco = (SELECT MAX(preco) FROM pokemons)
+
+-- COMO CRIAR UM USUARIO PARA SER USADO NO PRISMA COM PRIVILÉGIOS DE CRIAÇÃO DE BANCOS DE DADOS.
+CREATE USER capacita_fsm2 WITH PASSWORD '1234567890' CREATEDB;
