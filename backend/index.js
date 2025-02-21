@@ -33,9 +33,45 @@ app.post('/pokemons', async (req, res) => {
     } catch (err) {
         res.json({ error: 'Ocorreu um erro ao cadastrar o pokemon', msg: err.message });
     }
-
 });
 
+
+app.get('/populate', async (req, res) => {
+    try {
+        const pokemonsBd = await prisma.pokemons.createMany({
+            data: [
+                {nome: 'Pikachu', preco: 300, estoque: 1, tipo: 'Eletrico', raridade: 'Comum', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png'},
+                {nome: 'Squirtle', preco: 200, estoque: 2, tipo: 'Agua', raridade: 'Comum', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png'},
+                {nome: 'Charmander', preco: 150, estoque: 3, tipo: 'Fogo', raridade: 'Comum', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png'},
+                {nome: 'Bulbasaur', preco: 100, estoque: 4, tipo: 'Planta', raridade: 'Comum', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'},
+                {nome: 'Mewtwo', preco: 1000, estoque: 1, tipo: 'Psiquico', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png'},
+                {nome: 'Mew', preco: 1000, estoque: 1, tipo: 'Psiquico', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png'},
+                {nome: 'Rayquaza', preco: 1000, estoque: 1, tipo: 'Fogo', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png'},
+                {nome: 'Groudon', preco: 1000, estoque: 1, tipo: 'Terra', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png'},
+                {nome: 'Kyogre', preco: 1000, estoque: 1, tipo: 'Agua', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png'},
+                {nome: 'Lugia', preco: 1000, estoque: 1, tipo: 'Ar', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png'},
+                {nome: 'Ho-Oh', preco: 1000, estoque: 1, tipo: 'Fogo', raridade: 'Raro', url_img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png'},
+            ]
+        });
+        res.json(pokemonsBd);
+    } catch (err) {
+        res.json({ error: 'Ocorreu um erro ao cadastrar os pokemons', msg: err.message });
+    }
+});
+
+app.get('/test', async (req, res) => {
+    try {
+
+        const pokemonsOrdenados = await prisma.pokemons.findMany({
+            orderBy: {
+                preco: 'asc',
+            }
+        });
+        res.json(pokemonsOrdenados);
+    } catch (err) {
+        res.json({ error: 'Ocorreu um erro ao listar os pokemons', msg: err.message });
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

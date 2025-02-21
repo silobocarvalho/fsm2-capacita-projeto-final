@@ -36,7 +36,7 @@ enum RARIDADE_POKEMON {
 }
 
 model pokemons{
-  id_pokemon Int @id @default(autoincrement())
+  id_pokemon String @id @default(uuid())
   nome String @unique
   preco Float
   estoque Int @default(0)
