@@ -16,3 +16,148 @@ Cria arquivos de configuração do Prisma
 
 --Inicializar o banco de dados e atualizar o modelo
 npx prisma migrate dev --name init
+
+
+-----------------------------------------------------------------
+
+// Criação
+const newUser = await prisma.user.create({
+  data: {
+    name: 'Alice',
+    email: 'alice@example.com',
+  },
+});
+const newUsers = await prisma.user.createMany({
+  data: [
+    { name: 'Bob', email: 'bob@example.com' },
+    { name: 'Charlie', email: 'charlie@example.com' },
+  ],
+});
+
+// Criação
+const newUser = await prisma.user.create({
+  data: {
+    name: 'Alice',
+    email: 'alice@example.com',
+  },
+});
+const newUsers = await prisma.user.createMany({
+  data: [
+    { name: 'Bob', email: 'bob@example.com' },
+    { name: 'Charlie', email: 'charlie@example.com' },
+  ],
+});
+
+// Leitura
+const user = await prisma.user.findUnique({
+  where: {
+    id: 1,
+  },
+});
+const user = await prisma.user.findFirst({
+  where: {
+    name: 'Alice',
+  },
+});
+const users = await prisma.user.findMany({
+  where: {
+    email: {
+      contains: 'example.com',
+    },
+  },
+});
+const userCount = await prisma.user.count({
+  where: {
+    name: 'Alice',
+  },
+});
+
+
+// Atualizaçãoconst updatedUser = await prisma.user.update({
+  where: {
+    id: 1,
+  },
+  data: {
+    email: 'new-email@example.com',
+  },
+});
+//upsert: Atualiza um registro se ele existir, ou cria um novo se não existir.
+const user = await prisma.user.upsert({
+  where: {
+    id: 1,
+  },
+  update: {
+    email: 'updated-email@example.com',
+  },
+  create: {
+    name: 'Alice',
+    email: 'alice@example.com',
+  },
+});
+
+// Ordenaçãoconst users = await prisma.user.findMany({
+  orderBy: {
+    name: 'asc', // Ordena por nome em ordem crescente
+  },
+});
+// SQL puro
+const users = await prisma.$queryRaw`SELECT * FROM User WHERE name = 'Alice'`;
+
+
+----------------------------------------------------------------
+PRINCIPAIS MARCAÇÕES
+
+model User {
+  id Int @id @default(autoincrement()) // Define o campo "id" como chave primária com valor padrão autoincrementável
+}
+model User {
+  id    Int    @id @default(autoincrement())
+  email String @unique // Garante que o campo "email" tenha valores únicos na tabela
+}
+model User {
+  id       Int    @id @default(autoincrement())
+  fullName String @map("name") // Mapeia o campo "fullName" no Prisma para o nome "name" no banco de dados
+}
+model User {
+  id        Int      @id @default(autoincrement())
+  updatedAt DateTime @updatedAt // Atualiza automaticamente o campo "updatedAt" com a data/hora da última atualização
+}
+
+model User {
+  firstName String
+  lastName  String
+  email     String
+  @@id([firstName, lastName]) // Define uma chave primária composta usando os campos "firstName" e "lastName"
+}
+model User {
+  firstName String
+  lastName  String
+  email     String
+  @@unique([firstName, lastName]) // Define uma restrição de unicidade composta usando os campos "firstName" e "lastName"
+}
+
+model User {  id Int @id @default(autoincrement()) // Gera valores incrementais automaticamente para o campo "id"
+}
+model User {
+  id String @id @default(uuid()) // Gera um UUID como valor padrão para o campo "id"
+}
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String @db.VarChar(255) // Define o tipo da coluna "name" como VARCHAR(255) no banco de dados
+}
+
+----------------------------------------------------------------
+
+Resumo das Principais Marcações:
+@id: Define a chave primária.
+@default: Define um valor padrão.
+@unique: Garante que o campo tenha valores únicos.
+@updatedAt: Atualiza automaticamente o campo com a data/hora da última atualização.
+@map: Mapeia o nome do campo ou modelo no banco de dados.
+@relation: Define relacionamentos entre modelos.
+@@id: Define uma chave primária composta.
+@@unique: Define uma restrição de unicidade composta.
+@@index: Cria um índice no banco de dados.
+autoincrement(): Gera valores incrementais automaticamente.
+now(): Define a data/hora atual como valor padrão.
+uuid(): Gera um UUID como valor padrão.
