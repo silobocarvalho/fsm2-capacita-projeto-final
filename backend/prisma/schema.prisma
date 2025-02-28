@@ -43,4 +43,6 @@ model pokemons{
   tipo TIPO_POKEMON
   raridade RARIDADE_POKEMON
   url_img String
+  fraquezas String @default("")
+  createdAt DateTime @default(now())
 }

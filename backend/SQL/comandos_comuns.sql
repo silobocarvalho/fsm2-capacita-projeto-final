@@ -49,3 +49,7 @@ SELECT nome, preco FROM pokemons WHERE preco = (SELECT MAX(preco) FROM pokemons)
 
 -- COMO CRIAR UM USUARIO PARA SER USADO NO PRISMA COM PRIVILÉGIOS DE CRIAÇÃO DE BANCOS DE DADOS.
 CREATE USER capacita_fsm2 WITH PASSWORD '1234567890' CREATEDB;
+
+
+-- Alterar o TIMEZON para Brasil. Executar dentro do PGADMIN.
+ALTER DATABASE vendas_pokemons_fsm2 SET TIMEZONE TO "America/Sao_Paulo";

@@ -7,6 +7,9 @@ const port = 3000;
 
 app.use(express.json());
 
+// Pokemon
+// CRUD -> Criação, Leitura (Read), Update (atualizar) e Delete 
+
 //Retorna todos os pokemons que estão cadastrados!
 app.get('/pokemons', async (req, res) => {
     try {
@@ -29,12 +32,44 @@ app.post('/pokemons', async (req, res) => {
         });
 
         res.json(novoPokemon);
-
     } catch (err) {
         res.json({ error: 'Ocorreu um erro ao cadastrar o pokemon', msg: err.message });
     }
 });
 
+
+app.put('/pokemons/:idPokemon', async (req, res) => {
+    
+    const { idPokemon } = req.params
+    const { nome, preco, estoque, tipo, raridade, url_img } = req.body;
+
+    try {
+        const pokemonAtualizado = await prisma.pokemons.update({
+            where: { id_pokemon: idPokemon  },
+            data: {
+                nome, preco, estoque, tipo, raridade, url_img
+            },
+        });
+
+        res.json(pokemonAtualizado);
+    } catch (err) {
+        res.json({ error: 'Ocorreu um erro ao atualizar o pokemon', msg: err.message });
+    }
+});
+
+
+app.delete('/pokemons/:idPokemon', async (req, res) => {
+    const { idPokemon } = req.params;
+    try {
+        const pokemonDeletado = await prisma.pokemons.delete({
+            where: { id_pokemon: idPokemon },
+        });
+
+        res.json(pokemonDeletado);
+    } catch (err) {
+        res.json({ error: 'Ocorreu um erro ao deletar o pokemon', msg: err.message });
+    }
+});
 
 app.get('/populate', async (req, res) => {
     try {
@@ -74,5 +109,5 @@ app.get('/test', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Servidor executando em: http://localhost:${port}`);
 });
