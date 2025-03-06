@@ -1,3 +1,21 @@
+/*
+
+1. Precisa instalar: npm install --save-dev jest supertest
+2. Vamos criar um arquivo chamado server.test.js para escrever nossos testes.
+
+3. Add no package.json
+"scripts": {
+  "test": "jest"
+}
+
+4. npm test // Para rodar os testes
+
+5. Necessário alterar o index.js para evitar erro de conexões abertas: 
+// Exporta o app e o server para os testes
+module.exports = { app, server };
+
+*/
+
 const request = require('supertest');
 const {app, server} = require('./index.js'); // Substitua pelo caminho correto do seu arquivo do servidor
 
