@@ -108,6 +108,10 @@ app.get('/test', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Servidor executando em: http://localhost:${port}`);
 });
+
+
+// Exporta o app e o server para os testes
+module.exports = { app, server };
