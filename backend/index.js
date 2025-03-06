@@ -18,6 +18,30 @@ app.get('/pokemons', async (req, res) => {
     } catch (err) {
         res.json({ error: 'Ocorreu um erro ao listar os pokemons', msg: err.message });
     }
+
+    /** A segunda opção é retornar somente alguns atributos do Pokemon:
+     * 1. Filtrando no banco de dados:
+     const pokemonsBd = await prisma.pokemons.findMany({
+            select: {
+                id_pokemon: true,
+                nome: true,
+                preco: true,
+                url_img: true
+            }
+        });
+        res.json(pokemonsBd);
+
+        2. Filtrando com Map
+        const pokemonsBd = await prisma.pokemons.findMany();
+        const pokemonsFiltrados = pokemonsBd.map(pokemon => ({
+            id_pokemon: pokemon.id_pokemon,
+            nome: pokemon.nome,
+            preco: pokemon.preco,
+            url_img: pokemon.url_img
+        }));
+        res.json(pokemonsFiltrados);
+     * 
+     */
 });
 
 
