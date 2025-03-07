@@ -41,7 +41,7 @@ describe('Testes das rotas de Pokémons', () => {
                 url_img: 'https://example.com/pikachu.png'
             });
 
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(201); // 201 representando que o objeto foi criado no servidor.
         expect(response.body).toHaveProperty('id_pokemon');
         pokemonId = response.body.id_pokemon; // Salva o ID para usar nos próximos testes
     });

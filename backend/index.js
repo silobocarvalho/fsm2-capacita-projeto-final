@@ -12,38 +12,55 @@ app.use(express.json());
 
 //Retorna todos os pokemons que estão cadastrados!
 app.get('/pokemons', async (req, res) => {
+    
+    /*
     try {
         const pokemonsBd = await prisma.pokemons.findMany();
         res.json(pokemonsBd);
     } catch (err) {
         res.json({ error: 'Ocorreu um erro ao listar os pokemons', msg: err.message });
     }
+        */
 
-    /** A segunda opção é retornar somente alguns atributos do Pokemon:
-     * 1. Filtrando no banco de dados:
+    // A segunda opção é retornar somente alguns atributos do Pokemon:
+    // * 1. Filtrando no banco de dados: 
+      
      const pokemonsBd = await prisma.pokemons.findMany({
-            select: {
+        // vai ser convertido para o comando SQL: SELECT id_pokemon, nome, preco, estoque, tipo, raridade, url_img FROM pokemons    
+        select: {
                 id_pokemon: true,
                 nome: true,
                 preco: true,
-                url_img: true
+                estoque: true,
+                tipo: true,
+                raridade: true,
+                url_img: true,
+                fraquezas: true
             }
         });
         res.json(pokemonsBd);
 
-        2. Filtrando com Map
+   /*   
+        // 2. Filtrando com Map
         const pokemonsBd = await prisma.pokemons.findMany();
         const pokemonsFiltrados = pokemonsBd.map(pokemon => ({
             id_pokemon: pokemon.id_pokemon,
             nome: pokemon.nome,
             preco: pokemon.preco,
+            estoque: pokemon.estoque,
+            tipo: pokemon.tipo,
+            raridade: pokemon.raridade,
+            fraquezas: pokemon.fraquezas,
             url_img: pokemon.url_img
         }));
         res.json(pokemonsFiltrados);
-     * 
-     */
+        */
+
 });
 
+app.get('/test', (req, res) => {
+    res.status(201).json({ message: "Teste de status 201" });
+});
 
 app.post('/pokemons', async (req, res) => {
     const { nome, preco, estoque, tipo, raridade, url_img } = req.body;
@@ -54,10 +71,10 @@ app.post('/pokemons', async (req, res) => {
                 nome, preco, estoque, tipo, raridade, url_img
             },
         });
-
-        res.json(novoPokemon);
+        //res.status(201).json({ message: "Teste de status 201" });
+        res.status(201).json(novoPokemon);
     } catch (err) {
-        res.json({ error: 'Ocorreu um erro ao cadastrar o pokemon', msg: err.message });
+        res.status(500).json({ error: 'Ocorreu um erro ao cadastrar o pokemon', msg: err.message });
     }
 });
 
