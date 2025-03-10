@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { getPokemons, deletePokemon } from './Api';
+import { getPokemons } from './Api';
 import PokemonCard from './PokemonCard';
 
 const PokemonList = () => {
@@ -10,15 +10,9 @@ const PokemonList = () => {
     }, []);
     const fetchPokemons = async () => {
         const response = await getPokemons();
-        setPokemons(response.data);
+        setPokemons(response);
     };
-    /*
-    const handleDelete = async (id) => {
-        await deletePokemon(id);
-        fetchPokemons();
-    };
-    */
-   
+
     return (
         <div className="app">
             <h1>Lista de Pokémons</h1>
