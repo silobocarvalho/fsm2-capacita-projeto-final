@@ -1,0 +1,94 @@
+/* Estilos globais */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.pokemon-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.pokemon-info {
+  padding: 15px;
+}
+
+.pokemon-info h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.pokemon-info p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.pokemon-info p strong {
+  color: #333;
+}
+
+/* Separador entre os cards */
+.pokemon-list::after {
+  content: '';
+  flex: auto;
+}
+
+/* Efeito de gradiente no fundo do card */
+.pokemon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  z-index: -1;
+  border-radius: 15px;
+}
+
+/* Efeito de brilho ao passar o mouse */
+.pokemon-card:hover::before {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+}
