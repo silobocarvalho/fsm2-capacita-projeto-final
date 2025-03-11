@@ -1,0 +1,8 @@
+// Criar a estrutura de pastas do projeto React.
+1. npm create vite@latest pokemon-app --template reactcd pokemon-app
+
+// Instalar a biblioteca para requisições HTTP e o Router para criação de rotas.
+2. npm install axios react-router-dom
+
+// Executar o app React
+3. npm run dev
