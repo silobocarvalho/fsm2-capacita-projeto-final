@@ -12,7 +12,6 @@ const PokemonCard = ({ pokemon }) => {
     <p><strong>Estoque:</strong> {pokemon.estoque}</p>
     <p><strong>Raridade:</strong> {pokemon.raridade}</p>
     <p><strong>Fraquezas:</strong> {pokemon.fraquezas == "" ? "Sem fraquezas conhecidas." : pokemon.fraquezas }</p>
-
    </div>
   </div>
  );

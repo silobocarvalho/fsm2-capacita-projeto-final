@@ -38,7 +38,7 @@ h1 {
 
 .pokemon-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.957);
 }
 
 .pokemon-image {
@@ -90,5 +90,5 @@ h1 {
 
 /* Efeito de brilho ao passar o mouse */
 .pokemon-card:hover::before {
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(45deg, rgba(96, 166, 250, 0.2), rgba(245, 180, 180, 0.1));
 }

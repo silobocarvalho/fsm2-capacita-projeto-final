@@ -8,6 +8,7 @@ const PokemonList = () => {
     useEffect(() => {
         fetchPokemons();
     }, []);
+    
     const fetchPokemons = async () => {
         const response = await getPokemons();
         setPokemons(response);
